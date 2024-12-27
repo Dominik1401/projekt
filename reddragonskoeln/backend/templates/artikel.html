@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikelverwaltung - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('backend.static', filename='css/backend-style.css') }}">
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Artikelverwaltung</h1>
+    </header>
+    
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="{{ url_for('backend.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('backend.bilder') }}">Bilder</a></li>
+            <li><a href="{{ url_for('backend.artikel') }}">Artikel</a></li>
+            <li><a href="{{ url_for('backend.logout') }}">Logout</a></li>
+			<li><a href="{{ url_for('backend.create_appointment') }}">Terminerstellung</a></li>
+        </ul>
+    </nav>
+
+    <main class="dashboard-container">
+        <section class="artikel-section">
+            <h2>Neuer Artikel</h2>
+            <a href="{{ url_for('backend.artikel_neu') }}" class="new-btn">Neuen Artikel erstellen</a>
+        </section>
+
+        <section class="artikel-liste">
+            <h2>Vorhandene Artikel</h2>
+            <div class="artikel-grid">
+                {% for artikel in artikel %}
+                <div class="artikel-container">
+                    <h3>{{ artikel.titel }}</h3>
+                    <p class="datum">Erstellt am: {{ artikel.erstelldatum.strftime('%d.%m.%Y') }}</p>
+                    {% if artikel %}
+                    <div class="form-group" style="display: flex; align-items: center; justify-content: flex-start; gap: 10px;">
+                        <span>Veröffentlichen</span>
+                        <input type="checkbox" 
+                               name="is_published" 
+                               {% if artikel.is_published %}checked{% endif %}
+                               style="width: 30px; height: 30px; cursor: pointer;">
+                    </div>
+                    {% endif %}
+                    <div class="artikel-actions">
+                        <a href="{{ url_for('backend.artikel_edit', artikel_id=artikel.id) }}" class="edit-btn">Bearbeiten</a>
+                        {% if not artikel.is_published %}
+                        <form action="{{ url_for('backend.artikel_publish', artikel_id=artikel.id) }}" method="POST" style="display: inline;">
+                            <button type="submit" class="publish-btn">Veröffentlichen</button>
+                        </form>
+                        {% endif %}
+                        <form action="{{ url_for('backend.artikel_delete', artikel_id=artikel.id) }}" method="POST" style="display: inline;">
+                            <button type="submit" class="delete-btn">Löschen</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

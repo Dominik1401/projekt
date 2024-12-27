@@ -1,0 +1,67 @@
+<!-- artikel_form.html: Artikel erstellen/bearbeiten -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel erstellen/bearbeiten</title>
+    <link rel="stylesheet" href="{{ url_for('backend.static', filename='css/backend-style.css') }}">
+    <script src="https://cdn.tiny.cloud/1/3ds0o8e4hveb3ibzmblrv6e5gaz40kpd0dvwpnvpdaz426yq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#content',
+            plugins: 'link image lists table',
+            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            height: 300
+        });
+    </script>
+</head>
+<body>
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="{{ url_for('backend.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('backend.bilder') }}">Bilder</a></li>
+            <li><a href="{{ url_for('backend.artikel') }}">Artikel</a></li>
+            <li><a href="{{ url_for('backend.create_appointment') }}">Terminerstellung</a></li>
+            <li><a href="{{ url_for('backend.logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <header class="admin-header">
+        <h1>{% if article %}Artikel bearbeiten{% else %}Neuen Artikel erstellen{% endif %}</h1>
+    </header>
+
+    <main class="admin-main">
+        <form method="POST" action="{{ url_for('backend.save_article') }}">
+            <div class="form-group">
+                <label for="title">Titel:</label>
+                <input type="text" id="title" name="title" class="form-control" value="{{ article.title if article else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Inhalt:</label>
+                <textarea id="content" name="content" class="form-control">{{ article.content if article else '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Beitragsbild:</label>
+                <select id="image" name="image" class="form-control">
+                    {% for image in images %}
+                        <option value="{{ image.filename }}" {% if article and article.image == image.filename %}selected{% endif %}>
+                            {{ image.filename }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="is_published">Veröffentlichen:</label>
+                <input type="checkbox" id="is_published" name="is_published" {% if article and article.is_published %}checked{% endif %}>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Speichern</button>
+            <a href="{{ url_for('backend.artikel') }}" class="btn btn-secondary">Abbrechen</a>
+        </form>
+    </main>
+</body>
+</html>

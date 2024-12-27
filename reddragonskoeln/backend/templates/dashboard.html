@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin-Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('backend.static', filename='css/backend-style.css') }}">
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Admin-Dashboard</h1>
+    </header>
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="{{ url_for('backend.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('backend.bilder') }}">Bilder</a></li>
+            <li><a href="{{ url_for('backend.artikel') }}">Artikel</a></li>
+            <li><a href="{{ url_for('backend.logout') }}">Logout</a></li>
+			<li><a href="{{ url_for('backend.create_appointment') }}">Terminerstellung</a></li>
+        </ul>
+    </nav>
+    <div class="dashboard-container">
+        <h2>Willkommen im Admin-Bereich</h2>
+        <!-- Hier kommen später die Verwaltungsfunktionen -->
+    </div>
+</body>
+</html>

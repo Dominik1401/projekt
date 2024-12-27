@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dragons Köln - Bilderarchiv</title>
+    <link rel="stylesheet" href="{{ url_for('frontend.static', filename='css/style.css') }}">
+</head>
+<body>
+
+	<header class="hero-banner">
+		<div class="hero-text">
+			<h1>Bilderarchiv</h1>
+		</div>
+	</header>
+	<nav class="sticky-nav">
+		<ul>
+			<li><a href="/">Startseite</a></li>
+			<li><a href="/impressum">Impressum</a></li>
+			<li><a href="/kontakt">Kontakt</a></li>
+			<li><a href="/bilderarchiv">Bilderarchiv</a></li>
+			<li><a href="/kalender">Kalender</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/appointments">Termine</a></li>
+			<li><a href="{{ url_for('backend.login') }}">Admin</a></li> <!-- Link to Admin Login -->
+		</ul>
+		
+	</nav>
+
+<main>
+
+  
+  <h1>Bildergalerie</h1>
+    <p>Hier findest du alle unsere Bilder!</p>
+
+    <div class="gallery">
+        {% for image in images %}
+        <img src="{{ url_for('backend.static', filename='uploads/' + image) }}" 
+             alt="Bild aus dem Archiv">
+        {% endfor %}
+    </div>
+
+
+</main>
+
+<footer>© 2024 Red Dragons Köln | Alle Rechte vorbehalten</footer>
+
+</body>
+</html>

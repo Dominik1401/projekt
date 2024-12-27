@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Red Dragons Köln</title>
+    <link rel="stylesheet" href="{{ url_for('frontend.static', filename='css/style.css') }}">
+	<img src="{{ url_for('backend.static', filename='...') }}">
+</head>
+
+<body>
+
+<header class="hero-banner">
+		<div class="hero-text">
+			<h1>Red Dragons Blog</h1>
+		</div>
+</header>
+	    <nav class="sticky-nav">
+			<ul>
+				<li><a href="/">Startseite</a></li>
+				<li><a href="/impressum">Impressum</a></li>
+				<li><a href="/kontakt">Kontakt</a></li>
+				<li><a href="/bilderarchiv">Bilderarchiv</a></li>
+				<li><a href="/kalender">Kalender</a></li>
+				<li><a href="/blog">Blog</a></li>
+				<li><a href="/appointments">Termine</a></li>
+				<li><a href="{{ url_for('backend.login') }}">Admin</a></li> <!-- Link to Admin Login -->
+			</ul>
+    </nav>
+
+    <main class="blog-container">
+        {% if artikel %}
+            {% for post in artikel %}
+            <article class="blog-post">
+                <h2>{{ post.titel }}</h2>
+                <div class="post-meta">
+                    <span class="date">{{ post.erstelldatum.strftime('%d.%m.%Y') }}</span>
+                </div>
+                <div class="post-content">
+                    {{ post.inhalt|safe }}
+                </div>
+            </article>
+            {% endfor %}
+        {% else %}
+            <p class="no-posts">Aktuell sind keine Blog-Einträge verfügbar.</p>
+        {% endif %}
+    </main>
+</body>
+</html>

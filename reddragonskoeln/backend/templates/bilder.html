@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilderverwaltung - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('backend.static', filename='css/backend-style.css') }}">
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Bilderverwaltung</h1>
+    </header>
+    
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="{{ url_for('backend.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('backend.bilder') }}">Bilder</a></li>
+            <li><a href="{{ url_for('backend.artikel') }}">Artikel</a></li>
+            <li><a href="{{ url_for('backend.logout') }}">Logout</a></li>
+			<li><a href="{{ url_for('backend.create_appointment') }}">Terminerstellung</a></li>
+        </ul>
+    </nav>
+
+    <main class="dashboard-container">
+        <!-- Upload-Formular -->
+        <section class="upload-section">
+            <h2>Neues Bild hochladen</h2>
+            <form action="{{ url_for('backend.upload_bild') }}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="bild">Bild auswählen:</label>
+                    <input type="file" id="bild" name="bild" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Beschreibung:</label>
+                    <textarea id="description" name="description" rows="3"></textarea>
+                </div>
+                <button type="submit">Hochladen</button>
+            </form>
+        </section>
+
+        <!-- Bildergalerie -->
+        <section class="bilder-gallery">
+            <h2>Vorhandene Bilder</h2>
+            <div class="gallery-grid">
+                {% for bild in bilder %}
+                <div class="bild-container">
+                    <img src="{{ url_for('backend.static', filename='uploads/' + bild.filename) }}" alt="{{ bild.description }}" class="gallery-img">
+                    <div class="bild-info">
+                        <p>{{ bild.description }}</p>
+                        <p class="upload-date">Hochgeladen: {{ bild.upload_date.strftime('%d.%m.%Y') }}</p>
+                        <form action="{{ url_for('backend.delete_bild', bild_id=bild.id) }}" method="POST">
+                            <button type="submit" class="delete-btn">Löschen</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="bildModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalBild">
+        <div id="bildText"></div>
+    </div>
+
+    <script>
+        // Modal Funktionalität
+        const modal = document.getElementById("bildModal");
+        const modalImg = document.getElementById("modalBild");
+        const captionText = document.getElementById("bildText");
+        const span = document.getElementsByClassName("close")[0];
+
+        // Bilder klickbar machen
+        document.querySelectorAll('.gallery-img').forEach(img => {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
+        // Modal schließen wenn auf X geklickt wird
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Modal schließen wenn außerhalb geklickt wird
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

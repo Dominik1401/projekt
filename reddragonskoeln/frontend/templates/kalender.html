@@ -1,0 +1,35 @@
+<!-- frontend/templates/kalender.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dragons Köln - Kalender</title>
+    <link rel="stylesheet" href="{{ url_for('frontend.static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="hero-banner">
+        <div class="hero-text">
+            <h1>Kalender</h1>
+        </div>
+    </header>
+    <nav class="sticky-nav">
+        <ul>
+			<li><a href="/">Startseite</a></li>
+			<li><a href="/impressum">Impressum</a></li>
+			<li><a href="/kontakt">Kontakt</a></li>
+			<li><a href="/bilderarchiv">Bilderarchiv</a></li>
+			<li><a href="/kalender">Kalender</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/appointments">Termine</a></li>
+			<li><a href="{{ url_for('backend.login') }}">Admin</a></li> <!-- Link to Admin Login -->
+        </ul>
+    </nav>
+    <main>
+        <section>
+            <h2>Veranstaltungskalender</h2>
+            <p>Hier erscheint in Zukunft der vom Backend verwaltete Veranstaltungskalender.</p>
+        </section>
+    </main>
+</body>
+</html>

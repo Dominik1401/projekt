@@ -1,0 +1,250 @@
+/* Global Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Admin Header Styling */
+.admin-header {
+    background-color: #8B0000; /* Deep red color */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Navigation Bar Styling */
+.admin-nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-nav li {
+    margin: 0 15px;
+}
+
+.admin-nav a {
+    text-decoration: none;
+    color: #8B0000;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-nav a:hover {
+    background-color: #8B0000;
+    color: white;
+    border-radius: 5px;
+}
+
+.admin-nav a.active {
+    color: white;
+    background-color: #8B0000;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Main Content Styling */
+.admin-main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Form Section Styling */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    color: #8B0000;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background-color: #8B0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #a40000;
+}
+
+/* Table Styling */
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.items-table th, .items-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.items-table th {
+    background-color: #8B0000;
+    color: white;
+}
+
+.items-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.no-items {
+    color: #999;
+    font-style: italic;
+}
+
+/* Login Page Styling */
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+.login-container h1 {
+    font-size: 28px;
+    color: #8B0000;
+    margin-bottom: 20px;
+}
+
+.login-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-container input[type="text"], .login-container input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+}
+
+.login-container button {
+    background-color: #8B0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+    display: block;
+}
+
+.login-container button:hover {
+    background-color: #a40000;
+}
+
+.login-container .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.login-container .back-home {
+    display: block;
+    margin: 20px auto 0; /* Zentrierung und Abstand zum Formular */
+    width: fit-content;
+    color: white;
+    background-color: #8B0000;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.login-container .back-home:hover {
+    background-color: #a40000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-nav ul {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .admin-nav li {
+        margin: 10px 0;
+    }
+
+    .admin-main {
+        padding: 15px;
+    }
+
+    .login-container {
+        margin: 20px;
+        padding: 15px;
+    }
+}

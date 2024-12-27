@@ -1,0 +1,63 @@
+<!-- appointments.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Red Dragons Köln - Termine</title>
+	<link rel="stylesheet" href="{{ url_for('frontend.static', filename='css/style.css') }}">
+</head>
+<body>
+
+	<header class="hero-banner">
+		<div class="hero-text">
+			<h1>Termine</h1>
+		</div>
+	</header>
+
+    <nav class="sticky-nav">
+        <ul>
+			<li><a href="/">Startseite</a></li>
+			<li><a href="/impressum">Impressum</a></li>
+			<li><a href="/kontakt">Kontakt</a></li>
+			<li><a href="/bilderarchiv">Bilderarchiv</a></li>
+			<li><a href="/kalender">Kalender</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/appointments">Termine</a></li>
+			<li><a href="{{ url_for('backend.login') }}">Admin</a></li> <!-- Link to Admin Login -->
+        </ul>
+    </nav>
+
+    <div class="content-section">
+        <div class="gallery-header">
+            {% if not session.authenticated %}
+                <h2>Login</h2>
+                <form method="POST" class="login-form">
+                    <div class="form-group">
+                        <label for="password">Passwort:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit">Anmelden</button>
+                </form>
+                
+                {% if error %}
+                    <div class="error-box">
+                        {{ error }}
+                    </div>
+                {% endif %}
+            {% else %}
+                <h2>Termine</h2>
+                <div class="gallery-grid">
+                    {% for appointment in appointments %}
+                        <div class="gallery-item">
+                            {{ appointment.date.strftime('%d.%m.%Y %H:%M') }} - {{ appointment.title }}
+                        </div>
+                    {% else %}
+                        <p>Keine Termine vorhanden</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

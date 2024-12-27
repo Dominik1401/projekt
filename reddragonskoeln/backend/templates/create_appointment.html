@@ -1,0 +1,75 @@
+<!-- create_appointments.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminerstellung</title>
+	<link rel="stylesheet" href="{{ url_for('backend.static', filename='css/backend-style.css') }}">
+</head>
+<body>
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="{{ url_for('backend.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('backend.bilder') }}">Bilder</a></li>
+            <li><a href="{{ url_for('backend.artikel') }}">Artikel</a></li>
+            <li><a href="{{ url_for('backend.create_appointment') }}" class="active">Terminerstellung</a></li>
+            <li><a href="{{ url_for('backend.logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <header class="admin-header">
+        <div class="header-content">
+            <h1>Terminerstellung</h1>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <section class="form-section">
+            <h2>Neuen Termin hinzufügen</h2>
+            <form method="POST" action="{{ url_for('backend.add_appointment') }}">
+                <div class="form-group">
+                    <label for="title">Titel:</label>
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Titel eingeben" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Beschreibung:</label>
+                    <textarea id="description" name="description" class="form-control" placeholder="Beschreibung hinzufügen"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Datum und Uhrzeit:</label>
+                    <input type="datetime-local" id="date" name="date" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Termin erstellen</button>
+            </form>
+        </section>
+
+        <section class="existing-items">
+            <h2>Vorhandene Termine</h2>
+            {% if appointments %}
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>Datum</th>
+                            <th>Titel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                            <tr>
+                                <td>{{ appointment.date.strftime('%d.%m.%Y %H:%M') }}</td>
+                                <td>{{ appointment.title }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-items">Keine Termine vorhanden</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

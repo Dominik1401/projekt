@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dragons Köln</title>
+    <link rel="stylesheet" href="{{ url_for('frontend.static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="hero-banner">
+        <div class="hero-text">
+            <h1>Red Dragons Köln</h1>
+        </div>
+    </header>
+    <nav class="sticky-nav">
+        <ul>
+			<li><a href="/">Startseite</a></li>
+			<li><a href="/impressum">Impressum</a></li>
+			<li><a href="/kontakt">Kontakt</a></li>
+			<li><a href="/bilderarchiv">Bilderarchiv</a></li>
+			<li><a href="/kalender">Kalender</a></li>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/appointments">Termine</a></li>
+			<li><a href="{{ url_for('backend.login') }}">Admin</a></li> <!-- Link to Admin Login -->
+        </ul>
+    </nav>
+    <main>
+        <section>
+            <h2>Über uns</h2>
+            <p>Herzlich Willkommen auf der offiziellen Website der Red Dragons Köln! Als stolzer Fanclub des 1. FC Köln heißen wir dich herzlich willkommen in unserer Gemeinschaft von leidenschaftlichen Anhängern und treuen Fans des „effzeh".</p>
+        </section>
+    </main>
+</body>
+</html>
